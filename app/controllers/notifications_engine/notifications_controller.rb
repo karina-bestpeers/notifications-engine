@@ -1,4 +1,4 @@
-module NotificationEngine
+module NotificationsEngine
   class NotificationsController < ApplicationController
 
     def index

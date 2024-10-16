@@ -1,4 +1,4 @@
-module NotificationEngine
+module NotificationsEngine
   class NotificationDeliveryService
     def initialize(notification)
       @notification = notification
