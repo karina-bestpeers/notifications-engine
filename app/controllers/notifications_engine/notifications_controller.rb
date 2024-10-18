@@ -17,7 +17,7 @@ module NotificationsEngine
     end
 
     def show_in_app_notifications
-      @notifications = Notification.where(channel: ['in-app', 'all'])
+      @notifications = Notification.where(channel: ['in-app', 'all'], user_id: params[:user_id])
     end
 
     private
