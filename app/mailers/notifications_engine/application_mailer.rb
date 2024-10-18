@@ -1,6 +1,6 @@
 module NotificationsEngine
   class ApplicationMailer < ActionMailer::Base
-    default from: "from@example.com"
+    default from: ENV["FROM"]
     layout "mailer"
   end
 end

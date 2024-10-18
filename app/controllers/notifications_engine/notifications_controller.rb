@@ -16,6 +16,10 @@ module NotificationsEngine
       end
     end
 
+    def show_in_app_notifications
+      @notifications = Notification.where(channel: ['in-app', 'all'])
+    end
+
     private
 
     def notification_params

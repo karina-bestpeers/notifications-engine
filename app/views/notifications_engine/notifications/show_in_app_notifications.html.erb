@@ -1,0 +1,8 @@
+<h2>Notification</h2>
+<% if @notifications.present? %>
+  <% @notifications.each do |notification| %>
+    <%= render notification %>
+  <% end %>
+<% else %>
+  <p>There is no notification</p>
+<% end %>
