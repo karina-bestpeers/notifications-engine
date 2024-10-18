@@ -25,14 +25,18 @@ module NotificationsEngine
     end
 
     def send_sms
-      to = "+91" + @notification.user_details["phone_number"]
-      message = @notification.message
-      from_phone = ENV['TWILIO_PHONE_NUMBER']
-      TwilioClient.messages.create(
-        from: from_phone,
-        to: to,
-        body: message
-      )
+      begin
+        to = "+91" + @notification.user_details["phone_number"]
+        message = @notification.message
+        from_phone = ENV['TWILIO_PHONE_NUMBER']
+        TwilioClient.messages.create(
+          from: from_phone,
+          to: to,
+          body: message
+        )
+      rescue
+        Puts "Unable to send the sms"
+      end
     end
   end
 end
