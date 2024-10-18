@@ -12,6 +12,10 @@ module NotificationsEngine
         send_sms
       when 'in_app'
         create_in_app_notification
+      when 'all'
+        send_email
+        send_sms
+        create_in_app_notification
       else
         raise 'Unsupported channel'
       end
@@ -20,15 +24,22 @@ module NotificationsEngine
     private
 
     def send_email
-      puts "Sending email to User #{@notification.user_id}: #{@notification.message}"
+      NotificationMailer.post_email(@notification).deliver_later
     end
 
     def send_sms
-      puts "Sending SMS to User #{@notification.user_id}: #{@notification.message}"
+      to = @notification.user_details["phone_number"]
+      message = @notification.message
+      FROM_PHONE = ENV['TWILIO_PHONE_NUMBER']
+      TwilioClient.messages.create(
+        from: FROM_PHONE,
+        to: to,
+        body: message
+      )
     end
 
     def create_in_app_notification
-      puts "In-app notification for User #{@notification.user_id}: #{@notification.message}"
+      
     end
   end
 end
