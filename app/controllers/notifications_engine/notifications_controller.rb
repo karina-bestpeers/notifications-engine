@@ -19,7 +19,7 @@ module NotificationsEngine
     private
 
     def notification_params
-      params.require(:notification).permit(:user_id, :message, :channel, :status, :user_details)
+      params.require(:notification).permit(:user_id, :message, :channel, :status, user_details: [:name, :email, :phone_number])
     end
   end
 end
