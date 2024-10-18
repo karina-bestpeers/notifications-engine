@@ -30,9 +30,9 @@ module NotificationsEngine
     def send_sms
       to = @notification.user_details["phone_number"]
       message = @notification.message
-      FROM_PHONE = ENV['TWILIO_PHONE_NUMBER']
+      from_phone = ENV['TWILIO_PHONE_NUMBER']
       TwilioClient.messages.create(
-        from: FROM_PHONE,
+        from: from_phone,
         to: to,
         body: message
       )
