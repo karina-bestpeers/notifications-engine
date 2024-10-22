@@ -1,8 +1,9 @@
 require 'rails_helper'
+require 'factories/notifications_engine_notifications'
 
-RSpec.describe NotificationsEngine, type: :model do
+RSpec.describe NotificationsEngine::Notification, type: :model do
 
-  let(:notification) { NotificationsEngine::Notification.new(status: 'Sent', message: 'This is a test message.', user_id: 1, user_details: {title: "test email"}) }
+  let(:notification) { build(:notification) }
 
   describe 'validations' do
     it 'is valid with valid attributes' do
