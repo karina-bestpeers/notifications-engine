@@ -6,10 +6,19 @@ gemspec
 
 gem "puma"
 
-gem "sqlite3"
+gem 'pg'
+gem 'activerecord'
 
 gem "sprockets-rails"
 gem 'twilio-ruby'
-gem 'dotenv', groups: [:development, :test]
 # Start debugger with binding.b [https://github.com/ruby/debug]
 # gem "debug", ">= 1.0.0"
+
+group :development, :test do
+  gem 'dotenv'
+  gem 'pry'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails', '~> 5.0'
+end
+gem 'rails-controller-testing'
