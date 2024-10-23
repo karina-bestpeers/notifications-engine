@@ -13,6 +13,8 @@ module NotificationsEngine
       when 'all'
         send_email
         send_sms
+      when 'in-app'
+
       else
         raise 'Unsupported channel'
       end
@@ -21,22 +23,11 @@ module NotificationsEngine
     private
 
     def send_email
-      NotificationMailer.post_email(@notification).deliver_now
+      NotificationsEngine::NotificationMailerWorker.perform_async(@notification.id)
     end
 
     def send_sms
-      begin
-        to = "+91" + @notification.user_details["phone_number"]
-        message = @notification.message
-        from_phone = ENV['TWILIO_PHONE_NUMBER']
-        TwilioClient.messages.create(
-          from: from_phone,
-          to: to,
-          body: message
-        )
-      rescue
-        Puts "Unable to send the sms"
-      end
+      NotificationsEngine::PushNotificationWorker.perform_async(@notification.id)
     end
   end
 end

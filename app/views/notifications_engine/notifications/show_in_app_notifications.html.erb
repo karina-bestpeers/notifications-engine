@@ -1,4 +1,6 @@
 <h2>Notification</h2>
+
+<%= link_to 'Mark as read all', read_all_notifications_path %>
 <% if @notifications.present? %>
   <% @notifications.each do |notification| %>
     <%= render notification %>
