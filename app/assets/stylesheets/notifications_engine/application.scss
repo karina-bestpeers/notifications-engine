@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+
+@import "active_admin/mixins";
+@import "active_admin/base";
