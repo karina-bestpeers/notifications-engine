@@ -4,7 +4,7 @@
     <%= notification.message %> <b>On Date:</b>
     <%= notification.created_at.in_time_zone('Asia/Kolkata').strftime('%d-%m-%Y %H:%M:%S') %> &nbsp &nbsp
     <% if notification.read == false %>
-    <%= link_to 'Mark as unread', read_one_notifications_path(id: notification.id) %>
+    <%= button_to 'Mark as unread', read_one_notifications_path, method: :get, params: { id: notification.id } %>
     <%end%>
   </p>
 </div>
