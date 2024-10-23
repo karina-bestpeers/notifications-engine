@@ -20,5 +20,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails', '~> 5.0'
+  gem 'database_cleaner-active_record'
 end
 gem 'rails-controller-testing'
