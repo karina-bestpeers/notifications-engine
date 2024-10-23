@@ -25,5 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", ">= 7.1.4"
   spec.add_development_dependency 'rspec-rails'
   spec.test_files = Dir["spec/**/*"]
+  spec.add_dependency "sidekiq"
 
 end

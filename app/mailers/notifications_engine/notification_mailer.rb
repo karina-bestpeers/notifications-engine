@@ -1,8 +1,8 @@
 module NotificationsEngine
   class NotificationMailer < ApplicationMailer
-    def post_email(notification)
+    def post_email(notification, user_email)
       @notification = notification
-      email = @notification.user_details["email"]
+      email = user_email
       mail(to: email, subject: @notification.message)
     end
   end

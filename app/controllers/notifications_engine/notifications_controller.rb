@@ -8,6 +8,7 @@ module NotificationsEngine
 
     def create
       notification = Notification.new(notification_params)
+      notification.read = false
       if notification.save
         NotificationDeliveryService.new(notification).send!
         render json: { message: 'Notification created and sent.' }, status: :created
@@ -17,7 +18,18 @@ module NotificationsEngine
     end
 
     def show_in_app_notifications
-      @notifications = Notification.where(channel: ['in-app', 'all'], user_id: params[:user_id])
+      @notifications = Notification.where(channel: ['in-app', 'all'])
+    end
+
+    def read_all
+      Notification.all.update_all(read: true)
+      redirect_to in_app_notifications_path
+    end
+
+    def read_one
+      notification = Notification.find_by(id: params[:id])
+      notification.update(read: true)
+      redirect_to in_app_notifications_path
     end
 
     private

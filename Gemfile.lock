@@ -3,6 +3,7 @@ PATH
   specs:
     notifications_engine (0.1.0)
       rails (>= 7.1.4)
+      sidekiq
 
 GEM
   remote: https://rubygems.org/
@@ -206,6 +207,8 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
+    redis-client (0.22.2)
+      connection_pool
     reline (0.5.10)
       io-console (~> 0.5)
     rspec-core (3.13.2)
@@ -225,6 +228,12 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.13.1)
+    sidekiq (7.3.2)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
