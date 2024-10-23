@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe NotificationsEngine::NotificationDeliveryService, type: :service do
-  let(:notification) do
-    double('Notification', channel: channel, user_details: { 'phone_number' => '1234567890' }, message: 'Test message')
-  end
+  let(:notification) { build(:notification, channel: channel) }
+
   let(:service) { described_class.new(notification) }
 
   describe '#send!' do

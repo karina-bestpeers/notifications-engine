@@ -4,15 +4,7 @@ RSpec.describe NotificationsEngine::NotificationsController, type: :controller d
   render_views
   routes { NotificationsEngine::Engine.routes }
 
-  let(:valid_attributes) do
-    {
-      user_id: 1,
-      message: "Test notification",
-      channel: "in-app",
-      status: "pending",
-      user_details: { name: "John Doe", email: "john@example.com", phone_number: "1234567890" }
-    }
-  end
+  let(:valid_attributes) {attributes_for(:notification)}
 
   let(:invalid_attributes) do
     {
@@ -56,18 +48,10 @@ RSpec.describe NotificationsEngine::NotificationsController, type: :controller d
   end
 
   describe 'GET #show_in_app_notifications' do
-    let!(:notification) do
-      NotificationsEngine::Notification.create!(
-        user_id: 1,
-        message: 'Test in-app notification',
-        channel: 'in-app',
-        status: 'sent',
-        user_details: { name: 'John Doe', email: 'john@example.com', phone_number: '1234567890' }
-      )
-    end
+    let!(:notification) { create(:notification, channel: 'in-app', status: 'sent') }
 
     it 'returns notifications for in-app channel' do
-      get :show_in_app_notifications, params: { user_id: 1 }
+      get :show_in_app_notifications, params: { user_id: notification.user_id }
       expect(assigns(:notifications)).to include(notification)
     end
   end
