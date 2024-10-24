@@ -1,0 +1,10 @@
+<div id="<%= dom_id notification_log %>">
+  <p>
+    <strong>-></strong>
+    <%= notification_log.notification.message %> <b>On Date:</b>
+    <%= notification_log.created_at.in_time_zone('Asia/Kolkata').strftime('%d-%m-%Y %H:%M:%S') %> &nbsp &nbsp
+    <% if notification_log.read == false %>
+    <%= button_to 'Mark as unread', read_one_notifications_path, method: :get, params: { id: notification_log.id } %>
+    <%end%>
+  </p>
+</div>

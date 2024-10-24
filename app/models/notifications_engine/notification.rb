@@ -1,8 +1,9 @@
 module NotificationsEngine
   class Notification < ApplicationRecord
+
+    has_many :notification_logs, class_name: 'NotificationsEngine::NotificationLog', dependent: :destroy
+
     validates :status, presence: true
     validates :message, presence: true
-    validates :user_id, presence: true
-    validates :user_details, presence: true
   end
 end

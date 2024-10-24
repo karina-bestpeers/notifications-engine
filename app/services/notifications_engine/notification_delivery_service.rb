@@ -13,8 +13,9 @@ module NotificationsEngine
       when 'all'
         send_email
         send_sms
+        send_in_app
       when 'in-app'
-
+        send_in_app
       else
         raise 'Unsupported channel'
       end
@@ -28,6 +29,19 @@ module NotificationsEngine
 
     def send_sms
       NotificationsEngine::PushNotificationWorker.perform_async(@notification.id)
+    end
+
+    def send_in_app
+      users = User.all
+      users.each do |user|
+        notification_log = NotificationsEngine::NotificationLog.new(
+          notifications_engine_notifications_id: @notification.id,
+          user_id: user.id,
+          status: "sent",
+          notification_type: "in-app"
+        )
+        notification_log.save
+      end
     end
   end
 end
