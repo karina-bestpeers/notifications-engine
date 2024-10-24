@@ -32,16 +32,7 @@ module NotificationsEngine
     end
 
     def send_in_app
-      users = User.all
-      users.each do |user|
-        notification_log = NotificationsEngine::NotificationLog.new(
-          notifications_engine_notifications_id: @notification.id,
-          user_id: user.id,
-          status: "sent",
-          notification_type: "in-app"
-        )
-        notification_log.save
-      end
+      NotificationsEngine::InAppNotificationWorker.perform_async(@notification.id)
     end
   end
 end
