@@ -1,9 +1,9 @@
 <h2>Notification</h2>
-<%= button_to 'Mark as read all', read_all_notifications_path, method: :get %></br>
+<% if @notification_logs.present? %>
+  <%= button_to 'Mark as read all', read_all_notifications_path, method: :get %></br>
 
-<% if @notifications.present? %>
-  <% @notifications.each do |notification| %>
-    <%= render notification %>
+  <% @notification_logs.each do |notification_log| %>
+    <%= render notification_log %>
   <% end %>
 <% else %>
   <p>There is no notification</p>
